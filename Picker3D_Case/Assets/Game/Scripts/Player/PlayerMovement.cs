@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class PlayerMovement
 {
+    private const float MoveRange = 3.7f;
+
     private Transform PlayerTransform;
     private Rigidbody PlayerRigidbody;
     private float SpeedValue;
     private float CurrentSpeed;
+    private Vector3 MovePosition;
 
     public PlayerMovement(float SpeedValue, Rigidbody PlayerRigidbody, Transform PlayerTransform)
     {
@@ -19,6 +22,10 @@ public class PlayerMovement
 
     public void Move()
     {
-        PlayerRigidbody.MovePosition(PlayerTransform.position + new Vector3(0, 0, CurrentSpeed * Time.fixedDeltaTime));
+        MovePosition = PlayerTransform.position + new Vector3(CurrentSpeed * InputManager.GetHorizontalValue() * Time.fixedDeltaTime,
+                                                            0, CurrentSpeed * Time.fixedDeltaTime);
+        MovePosition.x = Mathf.Clamp(MovePosition.x, -MoveRange, MoveRange);
+
+        PlayerRigidbody.MovePosition(MovePosition);
     }
 }
