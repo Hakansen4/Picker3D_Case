@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Ambrosia.EventBus;
+using System;
 
 public class PlayerMovement
 {
@@ -27,5 +29,26 @@ public class PlayerMovement
         MovePosition.x = Mathf.Clamp(MovePosition.x, -MoveRange, MoveRange);
 
         PlayerRigidbody.MovePosition(MovePosition);
+    }
+
+    public void SubEvents()
+    {
+        EventBus<Event_CountBall>.AddListener(StopMovement);
+        EventBus<Event_CountingEnded>.AddListener(ResumeMovement);
+    }
+    public void UnSubEvents()
+    {
+        EventBus<Event_CountBall>.RemoveListener(StopMovement);
+        EventBus<Event_CountingEnded>.RemoveListener(ResumeMovement);
+    }
+
+    private void ResumeMovement(object sender, Event_CountingEnded @event)
+    {
+        CurrentSpeed = SpeedValue;
+    }
+
+    private void StopMovement(object sender, Event_CountBall @event)
+    {
+        CurrentSpeed = 0.0f;
     }
 }
