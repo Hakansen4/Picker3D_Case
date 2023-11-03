@@ -39,7 +39,7 @@ public class BlockController : MonoBehaviour
         }
         else
         {
-            Debug.Log("Failed");
+            EventBus<Event_LevelFailed>.Emit(this, new Event_LevelFailed());
         }
     }
 

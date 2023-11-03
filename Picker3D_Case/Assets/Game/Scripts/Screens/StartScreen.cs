@@ -1,4 +1,5 @@
 using UnityEngine;
+using Ambrosia.EventBus;
 
 public class StartScreen : ScreenBaseState
 {
@@ -9,6 +10,12 @@ public class StartScreen : ScreenBaseState
     {
         startScreen = Screen;
     }
+
+    public override void CloseScreen(ScreenStateManager screen)
+    {
+        startScreen.SetActive(false);
+    }
+
     public override void OpenScreen(ScreenStateManager screen)
     {
         startScreen.SetActive(true);
@@ -16,6 +23,9 @@ public class StartScreen : ScreenBaseState
 
     public override void UpdateScreen(ScreenStateManager screen)
     {
-
+        if(InputManager.IsSpacePressed())
+        {
+            EventBus<Event_StartGame>.Emit(this, new Event_StartGame());
+        }
     }
 }

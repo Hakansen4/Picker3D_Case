@@ -17,7 +17,7 @@ public class PlayerMovement
     public PlayerMovement(float SpeedValue, Rigidbody PlayerRigidbody, Transform PlayerTransform)
     {
         this.SpeedValue = SpeedValue;
-        CurrentSpeed = SpeedValue;
+        CurrentSpeed = 0.0f;
         this.PlayerRigidbody = PlayerRigidbody;
         this.PlayerTransform = PlayerTransform;
     }
@@ -35,11 +35,18 @@ public class PlayerMovement
     {
         EventBus<Event_CountBall>.AddListener(StopMovement);
         EventBus<Event_CountingEnded>.AddListener(ResumeMovement);
+        EventBus<Event_StartGame>.AddListener(StartMovement);
     }
     public void UnSubEvents()
     {
         EventBus<Event_CountBall>.RemoveListener(StopMovement);
         EventBus<Event_CountingEnded>.RemoveListener(ResumeMovement);
+        EventBus<Event_StartGame>.RemoveListener(StartMovement);
+    }
+
+    private void StartMovement(object sender, Event_StartGame @event)
+    {
+        CurrentSpeed = SpeedValue;
     }
 
     private void ResumeMovement(object sender, Event_CountingEnded @event)
