@@ -1290,7 +1290,7 @@ MonoBehaviour:
   _CollectedBalls: {fileID: 536280388813803953}
   _AnimationController: {fileID: 536280388794314251}
   BallRange: 10
-  WaitTime: 2.5
+  WaitTime: 1.5
 --- !u!1 &536280390028982706
 GameObject:
   m_ObjectHideFlags: 0
