@@ -14,7 +14,10 @@ public class ScreenStateManager : MonoBehaviour
     [SerializeField] private Image[] _BlockRenderers;
 
     [Header("End Game Screen")]
-    [SerializeField] private GameObject _EndGameScreen;
+    [SerializeField] private GameObject _LevelFailedScreen;
+    [SerializeField] private GameObject _LevelPassedScreen;
+    [SerializeField] private Button _RestartLevelButton;
+    [SerializeField] private Button _NextLevelButton;
 
 
     private ScreenBaseState state;
@@ -26,7 +29,7 @@ public class ScreenStateManager : MonoBehaviour
     {
         startScreen = new StartScreen(_StartScreen);
         playScreen = new PlayScreen(_PlayScreen, _BlockRenderers,_GreenColor);
-        endScreen = new EndGameScreen(_EndGameScreen);
+        endScreen = new EndGameScreen(_LevelFailedScreen, _LevelPassedScreen, _RestartLevelButton, _NextLevelButton);
 
         state = startScreen;
         state.OpenScreen(this);
@@ -38,6 +41,7 @@ public class ScreenStateManager : MonoBehaviour
         EventBus<Event_LevelPassed>.AddListener(LevelPassed);
         
         playScreen.SubEvents();
+        endScreen.SetButtons();
     }
     private void OnDisable()
     {
