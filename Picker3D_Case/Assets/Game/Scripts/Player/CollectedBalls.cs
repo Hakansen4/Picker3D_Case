@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using Ambrosia.EventBus;
 using System;
+using Manager;
 
 namespace PlayerWorks
 {
     public class CollectedBalls : MonoBehaviour
     {
         private const string ballTag = "Ball";
+        private const string collectSoundName = "CollectSound";
 
         [SerializeField]
         private Vector3 _ThrowPower;
@@ -39,7 +41,11 @@ namespace PlayerWorks
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag(ballTag))
+            {
                 collectedBallList.Add(other.GetComponent<Rigidbody>());
+                AudioManager.instance.ChangeActivity(collectSoundName);
+                AudioManager.instance.PlaySound(collectSoundName);
+            }
         }
         private void OnTriggerExit(Collider other)
         {

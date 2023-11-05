@@ -3498,6 +3498,55 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1895027291284728301, guid: 8c942fc91af9fe64d95f76faa3e52a25, type: 3}
   m_PrefabInstance: {fileID: 592632985}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &604328923
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 604328925}
+  - component: {fileID: 604328924}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &604328924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 604328923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95ef7a1ccd15d5e418bed1a4630b4f02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Sounds:
+  - name: CollectSound
+    clip: {fileID: 8300000, guid: 9cc045ff74a5ec543ad028447e8343ec, type: 3}
+    source: {fileID: 0}
+  _AmountOfSourcePool: 3
+  _AudioSourcePrefab: {fileID: 1017024857879148066, guid: 217b575b0f01eff42bbb5d32f198d98b, type: 3}
+--- !u!4 &604328925
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 604328923}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1266, y: 100, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &613273220 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1895027291284728301, guid: 8c942fc91af9fe64d95f76faa3e52a25, type: 3}
