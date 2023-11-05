@@ -26,7 +26,7 @@ namespace ScreenWorks
 
         public override void UpdateScreen(ScreenStateManager screen)
         {
-            if (InputManager.IsSpacePressed())
+            if (InputManager.IsMousePressed())
             {
                 EventBus<Event_StartGame>.Emit(this, new Event_StartGame());
             }
