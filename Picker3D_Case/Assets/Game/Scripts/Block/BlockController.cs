@@ -11,29 +11,21 @@ public class BlockController : MonoBehaviour
     [SerializeField] private BlockCollectedBalls _CollectedBalls;
     [SerializeField] private BlockAnimationController _AnimationController;
 
-    [SerializeField] private int BallRange;
+    [SerializeField] private int NeedBall;
     [SerializeField] private float WaitTime;
     private void Awake()
     {
-        _RangeText.text = BallRange.ToString();
-    }
-    private void OnEnable()
-    {
-        EventBus<Event_CountBall>.AddListener(StartCount);
-    }
-    private void OnDisable()
-    {
-        EventBus<Event_CountBall>.RemoveListener(StartCount);
+        _RangeText.text = NeedBall.ToString();
     }
 
-    private void StartCount(object sender, Event_CountBall @event)
+    public void StartCounting()
     {
         StartCoroutine(Count());
     }
     private IEnumerator Count()
     {
         yield return new WaitForSeconds(WaitTime);
-        if(_CollectedBalls.GetBallCount() >= BallRange)
+        if(_CollectedBalls.GetBallCount() >= NeedBall)
         {
             _AnimationController.StartAnimate();
         }

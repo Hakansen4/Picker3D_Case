@@ -1144,6 +1144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7c561c25f254f04b8c84647c900df0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _Controller: {fileID: 536280390004047162}
 --- !u!1 &536280389639181319
 GameObject:
   m_ObjectHideFlags: 0
@@ -1289,7 +1290,7 @@ MonoBehaviour:
   _RangeText: {fileID: 536280390378527778}
   _CollectedBalls: {fileID: 536280388813803953}
   _AnimationController: {fileID: 536280388794314251}
-  BallRange: 10
+  NeedBall: 0
   WaitTime: 1.5
 --- !u!1 &536280390028982706
 GameObject:
