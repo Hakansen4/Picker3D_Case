@@ -4,44 +4,47 @@ using UnityEngine;
 using Ambrosia.EventBus;
 using System;
 
-public class CollectedBalls : MonoBehaviour
+namespace PlayerWorks
 {
-    private const string BallTag = "Ball";
+    public class CollectedBalls : MonoBehaviour
+    {
+        private const string ballTag = "Ball";
 
-    [SerializeField]
-    private Vector3 _ThrowPower;
+        [SerializeField]
+        private Vector3 _ThrowPower;
 
-    private List<Rigidbody> CollectedBallList;
-    private void Awake()
-    {
-        CollectedBallList = new List<Rigidbody>();
-    }
-    private void OnEnable()
-    {
-        EventBus<Event_CountBall>.AddListener(ThrowBalls);
-    }
-    private void OnDisable()
-    {
-        EventBus<Event_CountBall>.RemoveListener(ThrowBalls);
-    }
-
-    private void ThrowBalls(object sender, Event_CountBall @event)
-    {
-        foreach (var ball in CollectedBallList)
+        private List<Rigidbody> collectedBallList;
+        private void Awake()
         {
-            ball.AddForce(_ThrowPower);
+            collectedBallList = new List<Rigidbody>();
         }
-        CollectedBallList.Clear();
-    }
+        private void OnEnable()
+        {
+            EventBus<Event_CountBall>.AddListener(ThrowBalls);
+        }
+        private void OnDisable()
+        {
+            EventBus<Event_CountBall>.RemoveListener(ThrowBalls);
+        }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag(BallTag))
-            CollectedBallList.Add(other.GetComponent<Rigidbody>());
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag(BallTag))
-            CollectedBallList.Remove(other.GetComponent<Rigidbody>());
+        private void ThrowBalls(object sender, Event_CountBall @event)
+        {
+            foreach (var ball in collectedBallList)
+            {
+                ball.AddForce(_ThrowPower);
+            }
+            collectedBallList.Clear();
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag(ballTag))
+                collectedBallList.Add(other.GetComponent<Rigidbody>());
+        }
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag(ballTag))
+                collectedBallList.Remove(other.GetComponent<Rigidbody>());
+        }
     }
 }

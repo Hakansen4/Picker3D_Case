@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using Ambrosia.EventBus;
 
-public class EndGamePointController : MonoBehaviour, IPoint
+namespace Point
 {
-    public void ReachedPoint()
+    public class EndGamePointController : MonoBehaviour, IPoint
     {
-        EventBus<Event_LevelPassed>.Emit(this, new Event_LevelPassed());
+        public void ReachedPoint()
+        {
+            EventBus<Event_LevelPassed>.Emit(this, new Event_LevelPassed());
+        }
     }
 }

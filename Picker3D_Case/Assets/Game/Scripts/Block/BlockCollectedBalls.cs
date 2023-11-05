@@ -3,26 +3,29 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class BlockCollectedBalls : MonoBehaviour
+namespace Block
 {
-    private const string BallTag = "Ball";
-
-    [SerializeField]
-    private TextMeshProUGUI _BallCountText;
-
-    private int BallCount;
-
-    private void OnCollisionEnter(Collision collision)
+    public class BlockCollectedBalls : MonoBehaviour
     {
-        if (collision.gameObject.CompareTag(BallTag))
+        private const string BallTag = "Ball";
+
+        [SerializeField]
+        private TextMeshProUGUI _BallCountText;
+
+        private int BallCount;
+
+        private void OnCollisionEnter(Collision collision)
         {
-            BallCount++;
-            _BallCountText.text = BallCount.ToString();
+            if (collision.gameObject.CompareTag(BallTag))
+            {
+                BallCount++;
+                _BallCountText.text = BallCount.ToString();
+            }
         }
-    }
 
-    public int GetBallCount()
-    {
-        return BallCount;
+        public int GetBallCount()
+        {
+            return BallCount;
+        }
     }
 }

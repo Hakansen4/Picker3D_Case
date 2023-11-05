@@ -2,14 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Ambrosia.EventBus;
+using Block;
 
-public class BlockPointController : MonoBehaviour, IPoint
+namespace Point
 {
-    [SerializeField] private BlockController _Controller;
-    public void ReachedPoint()
+    public class BlockPointController : MonoBehaviour, IPoint
     {
-        EventBus<Event_CountBall>.Emit(this, new Event_CountBall());
-        _Controller.StartCounting();
-        gameObject.SetActive(false);
+        [SerializeField] private BlockController _Controller;
+        public void ReachedPoint()
+        {
+            EventBus<Event_CountBall>.Emit(this, new Event_CountBall());
+            _Controller.StartCounting();
+            gameObject.SetActive(false);
+        }
     }
 }

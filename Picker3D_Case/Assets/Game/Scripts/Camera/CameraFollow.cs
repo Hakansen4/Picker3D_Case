@@ -1,24 +1,27 @@
 using UnityEngine;
 
-[ExecuteInEditMode]
-public class CameraFollow : MonoBehaviour
+namespace Camera
 {
-    private const float LockXAxis = 0;
-    
-    [Header("Camera Values")]
-    [Header("Camera Follow")]
-    [SerializeField]
-    private Transform FollowObject;
-    [SerializeField]
-    private Vector3 Offset;
+    [ExecuteInEditMode]
+    public class CameraFollow : MonoBehaviour
+    {
+        private const float lockXAxis = 0;
 
-    private void LateUpdate()
-    {
-        Follow();
-    }
-    public void Follow()
-    {
-        transform.position = new Vector3(LockXAxis, FollowObject.position.y + Offset.y,
-                                        FollowObject.position.z + Offset.z);
+        [Header("Camera Values")]
+        [Header("Camera Follow")]
+        [SerializeField]
+        private Transform _FollowObject;
+        [SerializeField]
+        private Vector3 _Offset;
+
+        private void LateUpdate()
+        {
+            Follow();
+        }
+        public void Follow()
+        {
+            transform.position = new Vector3(lockXAxis, _FollowObject.position.y + _Offset.y,
+                                            _FollowObject.position.z + _Offset.z);
+        }
     }
 }

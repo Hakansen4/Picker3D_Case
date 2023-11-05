@@ -1,31 +1,35 @@
 using UnityEngine;
 using Ambrosia.EventBus;
+using Manager;
 
-public class StartScreen : ScreenBaseState
+namespace ScreenWorks
 {
-    private GameObject startScreen;
-    
-    
-    public StartScreen(GameObject Screen)
+    public class StartScreen : ScreenBaseState
     {
-        startScreen = Screen;
-    }
+        private GameObject startScreen;
 
-    public override void CloseScreen(ScreenStateManager screen)
-    {
-        startScreen.SetActive(false);
-    }
 
-    public override void OpenScreen(ScreenStateManager screen)
-    {
-        startScreen.SetActive(true);
-    }
-
-    public override void UpdateScreen(ScreenStateManager screen)
-    {
-        if(InputManager.IsSpacePressed())
+        public StartScreen(GameObject Screen)
         {
-            EventBus<Event_StartGame>.Emit(this, new Event_StartGame());
+            startScreen = Screen;
+        }
+
+        public override void CloseScreen(ScreenStateManager screen)
+        {
+            startScreen.SetActive(false);
+        }
+
+        public override void OpenScreen(ScreenStateManager screen)
+        {
+            startScreen.SetActive(true);
+        }
+
+        public override void UpdateScreen(ScreenStateManager screen)
+        {
+            if (InputManager.IsSpacePressed())
+            {
+                EventBus<Event_StartGame>.Emit(this, new Event_StartGame());
+            }
         }
     }
 }

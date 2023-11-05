@@ -2,14 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LimitBallHeight : MonoBehaviour
+namespace Ball
 {
-    [SerializeField]
-    private float _LimitValue;
-    private void Update()
+    public class LimitBallHeight : MonoBehaviour
     {
-        if (transform.position.y >= _LimitValue)
-            transform.position = new Vector3(transform.position.x, _LimitValue, transform.position.z);
+        [SerializeField]
+        private float _LimitValue;
+        private void Update()
+        {
+            if (transform.position.y >= _LimitValue)
+                transform.position = new Vector3(transform.position.x, _LimitValue, transform.position.z);
 
+        }
     }
 }

@@ -3,66 +3,70 @@ using System.Collections.Generic;
 using UnityEngine;
 using Ambrosia.EventBus;
 using System;
+using Manager;
 
-public class PlayerMovement
+namespace PlayerWorks
 {
-    private const float MoveRange = 3.7f;
-
-    private Transform PlayerTransform;
-    private Rigidbody PlayerRigidbody;
-    private float SpeedValue;
-    private float CurrentSpeed;
-    private Vector3 MovePosition;
-
-    public PlayerMovement(float SpeedValue, Rigidbody PlayerRigidbody, Transform PlayerTransform)
+    public class PlayerMovement
     {
-        this.SpeedValue = SpeedValue;
-        CurrentSpeed = 0.0f;
-        this.PlayerRigidbody = PlayerRigidbody;
-        this.PlayerTransform = PlayerTransform;
-    }
+        private const float moveRange = 3.7f;
 
-    public void Move()
-    {
-        MovePosition = PlayerTransform.position + new Vector3(CurrentSpeed * InputManager.GetHorizontalValue() * Time.fixedDeltaTime,
-                                                            0, CurrentSpeed * Time.fixedDeltaTime);
-        MovePosition.x = Mathf.Clamp(MovePosition.x, -MoveRange, MoveRange);
+        private Transform playerTransform;
+        private Rigidbody playerRigidbody;
+        private float speedValue;
+        private float currentSpeed;
+        private Vector3 movePosition;
 
-        PlayerRigidbody.MovePosition(MovePosition);
-    }
+        public PlayerMovement(float SpeedValue, Rigidbody PlayerRigidbody, Transform PlayerTransform)
+        {
+            this.speedValue = SpeedValue;
+            currentSpeed = 0.0f;
+            this.playerRigidbody = PlayerRigidbody;
+            this.playerTransform = PlayerTransform;
+        }
 
-    public void SubEvents()
-    {
-        EventBus<Event_CountBall>.AddListener(StopMovement);
-        EventBus<Event_CountingEnded>.AddListener(ResumeMovement);
-        EventBus<Event_StartGame>.AddListener(StartMovement);
-        EventBus<Event_LevelPassed>.AddListener(EndMovement);
-    }
-    public void UnSubEvents()
-    {
-        EventBus<Event_CountBall>.RemoveListener(StopMovement);
-        EventBus<Event_CountingEnded>.RemoveListener(ResumeMovement);
-        EventBus<Event_StartGame>.RemoveListener(StartMovement);
-        EventBus<Event_LevelPassed>.RemoveListener(EndMovement);
-    }
+        public void Move()
+        {
+            movePosition = playerTransform.position + new Vector3(currentSpeed * InputManager.GetHorizontalValue() * Time.fixedDeltaTime,
+                                                                0, currentSpeed * Time.fixedDeltaTime);
+            movePosition.x = Mathf.Clamp(movePosition.x, -moveRange, moveRange);
 
-    private void EndMovement(object sender, Event_LevelPassed @event)
-    {
-        CurrentSpeed = 0.0f;
-    }
+            playerRigidbody.MovePosition(movePosition);
+        }
 
-    private void StartMovement(object sender, Event_StartGame @event)
-    {
-        CurrentSpeed = SpeedValue;
-    }
+        public void SubEvents()
+        {
+            EventBus<Event_CountBall>.AddListener(StopMovement);
+            EventBus<Event_CountingEnded>.AddListener(ResumeMovement);
+            EventBus<Event_StartGame>.AddListener(StartMovement);
+            EventBus<Event_LevelPassed>.AddListener(EndMovement);
+        }
+        public void UnSubEvents()
+        {
+            EventBus<Event_CountBall>.RemoveListener(StopMovement);
+            EventBus<Event_CountingEnded>.RemoveListener(ResumeMovement);
+            EventBus<Event_StartGame>.RemoveListener(StartMovement);
+            EventBus<Event_LevelPassed>.RemoveListener(EndMovement);
+        }
 
-    private void ResumeMovement(object sender, Event_CountingEnded @event)
-    {
-        CurrentSpeed = SpeedValue;
-    }
+        private void EndMovement(object sender, Event_LevelPassed @event)
+        {
+            currentSpeed = 0.0f;
+        }
 
-    private void StopMovement(object sender, Event_CountBall @event)
-    {
-        CurrentSpeed = 0.0f;
+        private void StartMovement(object sender, Event_StartGame @event)
+        {
+            currentSpeed = speedValue;
+        }
+
+        private void ResumeMovement(object sender, Event_CountingEnded @event)
+        {
+            currentSpeed = speedValue;
+        }
+
+        private void StopMovement(object sender, Event_CountBall @event)
+        {
+            currentSpeed = 0.0f;
+        }
     }
 }

@@ -4483,8 +4483,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0ab2707e892109468651734c82534d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FollowObject: {fileID: 400180359}
-  Offset: {x: 0, y: 5.81, z: -5.39}
+  _FollowObject: {fileID: 400180359}
+  _Offset: {x: 0, y: 5.81, z: -5.39}
 --- !u!1001 &1061185775
 PrefabInstance:
   m_ObjectHideFlags: 0
