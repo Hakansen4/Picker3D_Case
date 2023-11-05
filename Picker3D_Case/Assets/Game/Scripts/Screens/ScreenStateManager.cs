@@ -2,6 +2,7 @@ using UnityEngine;
 using Ambrosia.EventBus;
 using System;
 using UnityEngine.UI;
+using TMPro;
 
 public class ScreenStateManager : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class ScreenStateManager : MonoBehaviour
     [SerializeField] private Material _GreenColor;
     [SerializeField] private GameObject _PlayScreen;
     [SerializeField] private Image[] _BlockRenderers;
+    [SerializeField] private TextMeshProUGUI _LevelText;
+    [SerializeField] private TextMeshProUGUI _NextLevelText;
 
     [Header("End Game Screen")]
     [SerializeField] private GameObject _LevelFailedScreen;
@@ -28,7 +31,7 @@ public class ScreenStateManager : MonoBehaviour
     private void Awake()
     {
         startScreen = new StartScreen(_StartScreen);
-        playScreen = new PlayScreen(_PlayScreen, _BlockRenderers,_GreenColor);
+        playScreen = new PlayScreen(_PlayScreen, _BlockRenderers, _GreenColor, _LevelText, _NextLevelText);
         endScreen = new EndGameScreen(_LevelFailedScreen, _LevelPassedScreen, _RestartLevelButton, _NextLevelButton);
 
         state = startScreen;

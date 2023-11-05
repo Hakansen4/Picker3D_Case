@@ -8,6 +8,8 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class SceneLoader : MonoBehaviour
 {
+    private const string LevelPlayerPref = "Level";
+
     public static SceneLoader Instance { get; private set; }
 
     [SerializeField] private AssetReference[] _Levels;
@@ -15,12 +17,17 @@ public class SceneLoader : MonoBehaviour
     private int LevelIndex = 0;
     private void Awake()
     {
+        LevelIndex = PlayerPrefs.GetInt(LevelPlayerPref, 0);
         if(Instance == null)
             Instance = this;
         else
             Destroy(gameObject);
 
         DontDestroyOnLoad(gameObject);
+    }
+    private void Start()
+    {
+        LoadScene(LevelIndex);
     }
     private void OnEnable()
     {
@@ -41,6 +48,7 @@ public class SceneLoader : MonoBehaviour
     private void LoadNextLevel(object sender, Event_LoadNextLevel @event)
     {
         LevelIndex++;
+        PlayerPrefs.SetInt(LevelPlayerPref, LevelIndex);
         LoadScene(LevelIndex);
     }
 
